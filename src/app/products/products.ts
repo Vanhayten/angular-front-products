@@ -10,16 +10,24 @@ import { CurrencyPipe, NgIf } from '@angular/common';
 
 export class Products implements OnInit {
 
-  products: Array<any>;
+
+  products!: Array<any>;
 
   constructor() { }
+
   ngOnInit(): void {
       this.products = [
-    { id: 1, name: 'Computer', price: 100 },
-    { id: 2, name: 'Printer', price: 200 },
-    { id: 3, name: 'Smart watch', price: 300 }
-  ]
+        { id: 1, name: 'Computer', price: 100, selected: true },
+        { id: 2, name: 'Printer', price: 200, selected: true },
+        { id: 3, name: 'Smart watch', price: 300, selected: false}
+      ];
   }
 
+  handleDelete(p: any) {
+      let confirmation = confirm(`Are you sure you want to delete ${p.name}?`);
+      if (confirmation) {
+        this.products = this.products.filter(product => product.id !== p.id);
+      }
+  }
 
 }
